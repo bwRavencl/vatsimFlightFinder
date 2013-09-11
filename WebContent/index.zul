@@ -1,0 +1,70 @@
+<?page title="vatsim Flight Finder"?>
+<window title="vatsim Flight Finder" border="normal"
+	apply="de.bwravencl.vatsimFlightFinder.zk.Controller">
+	<vbox spacing="25px">
+		<vbox spacing="10px">
+			<hbox spacing="20px">
+				<label value="True Airspeed (KTAS)"
+					style="font-weight:bold" />
+				<spinner id="spinnerTAS"
+					constraint="no empty,min 1 max 999" value="430" width="60px" />
+			</hbox>
+
+			<hbox spacing="10px">
+				<groupbox mold="3d">
+					<caption label="Departure Time Window (ZULU)" />
+					<hbox spacing="20px">
+						<label value="from" />
+						<datebox id="dateboxDepartureBegin"
+							locale="en_US" format="yyyy-MM-dd HH:mm" width="150px"
+							onCreate="self.value = new Date()" constraint="no empty" />
+						<label value="to" />
+						<datebox id="dateboxDepartureEnd" locale="en_US"
+							format="yyyy-MM-dd HH:mm" width="150px"
+							onCreate="self.value = new Date(System.currentTimeMillis() + 1800000L)"
+							constraint="no empty" />
+					</hbox>
+				</groupbox>
+
+				<groupbox mold="3d">
+					<caption label="Arrival Time Window (ZULU)" />
+					<hbox spacing="20px">
+						<label value="from" />
+						<datebox id="dateboxArrivalBegin" locale="en_US"
+							format="yyyy-MM-dd HH:mm" width="150px"
+							onCreate="self.value = new Date(System.currentTimeMillis() + 3600000L)"
+							constraint="no empty" />
+						<label value="to" />
+						<datebox id="dateboxArrivalEnd" locale="en_US"
+							format="yyyy-MM-dd HH:mm" width="150px"
+							onCreate="self.value = new Date(System.currentTimeMillis() + 4800000L)"
+							constraint="no empty" />
+					</hbox>
+				</groupbox>
+			</hbox>
+			<groupbox mold="3d">
+				<caption
+					label="Positions that if staffed count an airport as online" />
+				<hbox spacing="20px">
+					<checkbox id="checkboxCountDelivery"
+						label="Delivery" checked="false" />
+					<checkbox id="checkboxCountGround" label="Ground"
+						checked="false" />
+					<checkbox id="checkboxCountTower" label="Tower"
+						checked="false" />
+					<checkbox id="checkboxCountApproach"
+						label="Approach" checked="true" />
+				</hbox>
+			</groupbox>
+		</vbox>
+		<button id="buttonSearch" label="Search" width="80px" />
+		<vbox spacing="5px">
+			<label id="labelResults" value="Results"
+				style="font-weight:bold" />
+			<textbox id="textboxResults" rows="20" cols="160"
+				readonly="true" />
+		</vbox>
+
+	</vbox>
+
+</window>
